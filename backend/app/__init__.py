@@ -60,7 +60,13 @@ Do not start every message the same way. Vary your tone and opening based on con
 # ── App Factory ───────────────────────────────────────────────────────────────
 
 def create_app():
-    app = Flask(__name__, static_folder='../../frontend')
+    # Render'da (Docker) frontend klasörü kök dizinde olabilir.
+    # Lokal geliştirme ve Render için uyumluluk sağlıyoruz.
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # /backend
+    root_dir = os.path.dirname(base_dir) # / project root
+    frontend_dir = os.path.join(root_dir, 'frontend')
+
+    app = Flask(__name__, static_folder=frontend_dir)
 
     app.config['SECRET_KEY'] = SECRET_KEY
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
@@ -326,11 +332,14 @@ def create_app():
 
     @app.route('/')
     def index():
-        return send_from_directory('../../frontend', 'index.html')
+        return send_from_directory(app.static_folder, 'index.html')
 
     @app.route('/<path:path>')
     def static_files(path):
-        return send_from_directory('../../frontend', path)
+        # Eğer dosya varsa servis et, yoksa index.html'e yönlendir (SPA desteği için)
+        if os.path.exists(os.path.join(app.static_folder, path)):
+            return send_from_directory(app.static_folder, path)
+        return send_from_directory(app.static_folder, 'index.html')
 
     # ── Init DB ───────────────────────────────────────────────────────────────
 
