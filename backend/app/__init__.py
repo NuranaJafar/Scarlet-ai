@@ -60,10 +60,9 @@ Do not start every message the same way. Vary your tone and opening based on con
 # ── App Factory ───────────────────────────────────────────────────────────────
 
 def create_app():
-    # Render'da (Docker) frontend klasörü kök dizinde olabilir.
-    # Lokal geliştirme ve Render için uyumluluk sağlıyoruz.
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # /backend
-    root_dir = os.path.dirname(base_dir) # / project root
+    # Render/Docker yapısında frontend klasörü backend ile aynı seviyededir.
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # /app/backend
+    root_dir = os.path.dirname(base_dir) # /app
     frontend_dir = os.path.join(root_dir, 'frontend')
 
     app = Flask(__name__, static_folder=frontend_dir)

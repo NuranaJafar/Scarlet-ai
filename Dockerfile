@@ -2,10 +2,15 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY backend/requirements.txt .
+# Önce gereksinimleri yükle (Cache için)
+COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY backend/ .
+# Tüm projeyi kopyala (backend ve frontend klasörleri dahil)
+COPY . .
+
+# Backend klasörüne geçerek çalıştır
+WORKDIR /app/backend
 
 EXPOSE 5000
 
