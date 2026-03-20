@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: scarlet-witch-ai
+    runtime: python
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "cd backend && gunicorn run:app"
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false # User must set this in Render Dashboard
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FLASK_APP
+        value: run.py
+      - key: FLASK_ENV
+        value: production
+      - key: DATABASE_URL
+        value: sqlite:///scarlet_witch.db
