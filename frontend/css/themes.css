@@ -1,0 +1,88 @@
+/* Light Theme */
+[data-theme="light"] {
+    --primary-color: #7c3aed;
+    --secondary-color: #d946ef;
+    --accent-color: #ec4899;
+    --dark-bg: #f8fafc;
+    --light-bg: #ffffff;
+    --card-bg: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: #e2e8f0;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --primary-color: #8b5fbf;
+    --secondary-color: #d946ef;
+    --accent-color: #ec4899;
+    --dark-bg: #0f172a;
+    --light-bg: #1e293b;
+    --card-bg: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --border-color: #334155;
+}
+
+/* Theme transition */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Light theme specific styles */
+[data-theme="light"] .message.ai .message-content {
+    background-color: #e2e8f0;
+    color: #0f172a;
+}
+
+[data-theme="light"] .sidebar {
+    background-color: #f1f5f9;
+}
+
+[data-theme="light"] .input-area {
+    background-color: #f1f5f9;
+}
+
+[data-theme="light"] .message-input {
+    background-color: rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .message-input:focus {
+    background-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .conversation-item {
+    background: rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .conversation-item:hover {
+    background: rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .new-chat-btn {
+    background: #7c3aed;
+}
+
+[data-theme="light"] .new-chat-btn:hover {
+    background: #d946ef;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: more) {
+    :root {
+        --text-secondary: #94a3b8;
+    }
+}

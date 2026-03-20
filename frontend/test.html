@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+    <h1>API Test</h1>
+    <button onclick="testAPI()">Test API</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/verify');
+                const data = await response.json();
+                result.innerHTML = '✅ API is working! Response: ' + JSON.stringify(data);
+            } catch (error) {
+                result.innerHTML = '❌ Connection error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
